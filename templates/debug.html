@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="container" name="content">
+    <h1>{{blog.name}}</h1>
+<!-- we pass the id of the particular content we want to read (refer home.html line 53) -->
+    <p>{{blog.content |safe }}</p>
+</div>
+
+<section id="comment" class="my-5">
+    <div class="container">
+      <!-- here we write the comment -->
+        <h2 class="my-3">Comment</h2>
+        <form action="{% url 'comment' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="blogid" value="{{ blog.id }}" hidden>
+            <textarea name="comment" id="" cols="100" rows="2">
+            </textarea>
+            <br>
+            <button class="btn btn-primary mt-3" type="primary">submit</button>
+        </form>
+
+        {% for comments in comemnt %}
+        <!-- here in this box we display the comment with a reply button if we click on reply button we will
+        get a text area to reply for that comment(see line 48)  -->
+        <div class="card w-75">
+            <div class="card-body">
+                <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                  </svg> <strong>{{ comments.name }}</strong>
+              <p class="card-text mt-3">{{ comments.Comment }}</p>
+              <!-- shvshv -->             
+              <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                reply
+              </button>
+            </p>
+            <div class="collapse" id="collapseExample">
+              <div class="card card-body">
+                <form action="{% url 'replies' %}" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="commentparent" value="{{ comments.id }}" >
+                  <input type="hidden" name="blogid" value="{{ blog.id }}" >
+                    <textarea name="reply" id="" cols="100" rows="3">
+                     <!-- here we write the reply for the comment.and after writing the reply the reply will be 
+                    displayed in a new box under comment (see line 62) -->
+                    </textarea>
+                    <br>
+                    <button class="btn btn-primary mt-3" type="primary">submit</button>
+                </form>
+              </div>
+            </div>
+            </div>
+          </div> 
+          {% for rep in reply %}
+          {% if rep.commentparent.id == comments.id %}
+          <div class="card w-75 mb-3 m-auto">
+            <div class="card-body">
+              <!-- here the display the reply of the comment -->
+              <h5 class="card-title">{{ rep.name }}</h5>
+              <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+              </svg> user
+          <p class="card-text mt-3"> {{rep.reply}} </p>   
+           </div>        
+          </div>  
+    </div>   
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+    </div>
+</section>
+{% endblock%}
+
+
+

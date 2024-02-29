@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+
+{% block content%}
+
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="https://source.unsplash.com/featured?technology"  height="500px" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h5> “Technology is the new key to freedom.”</h5>
+          <h1>Contact</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+        <div class="container m-5">
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="text">Full Name</label>
+                  <input type="text" name="fname" class="form-control" id="text" aria-describedby="emailHelp" placeholder="enter your user name">
+                </div>
+                <!-- heloooooooooooooooooooooooooo -->
+                <div class="form-group mt-3">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+               
+                <button type="submit" class="btn btn-primary mt-4">SignIn</button>
+              </form>     
+              <h1>{{ msg }}</h1> 
+        </div>
+{% endblock%}
+
+<div class="form-group mt-3">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+</div>

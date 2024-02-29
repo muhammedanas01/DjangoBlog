@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
+<body>
+  <div class="container">
+    <form method="post" action="" enctype="multipart/form-data">
+            
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Name</label>
+                <input type="text" class="form-control" name="name" id="exampleFormControlInput1" placeholder="enter your name here">
+              </div>
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Title</label>
+                <input type="text" class="form-control" name="title" id="exampleFormControlInput1" placeholder="title">
+              </div>
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">short description</label>
+                <input type="text" class="form-control" name="shortdesc" id="exampleFormControlInput1" placeholder="write a short description">
+              </div>
+              <!-- for content -->
+              <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Content</label>
+                <textarea class="form-control" name="content" id="content" cols="5" rows="5"></textarea> <!-- Make sure ID matches CKEditor initialization -->
+              </div>
+              <script>
+                ClassicEditor
+                        .create( document.querySelector( '#content' ) )
+                        .then( editor => {
+                                console.log( editor );
+                        } )
+                        .catch( error => {
+                                console.error( error );
+                        } );
+        </script>
+              <!-- image -->
+              <div class="mb-3">
+                <label for="formFile" class="form-label">Blog Image</label>
+                <input class="form-control" name="img" type="file" id="formFile">
+              </div>
+              <button class="btn btn-primary mt-2" type="primary">submit</button>
+        </form>
+   </div>
+
+
+{% endblock %}

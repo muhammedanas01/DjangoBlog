@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+      <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://source.unsplash.com/featured?technology" height="600px" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="https://source.unsplash.com/featured?Animal" height="600px" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="https://source.unsplash.com/featured?Nature" height="600px" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <!-- about -->
+      <div class="container py-5" >
+        <h1 class="text-center">About</h1>
+        <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam aliquid, necessitatibus facere, ducimus amet atque ratione, expedita laborum fuga qui nobis quos. Atque voluptas consequuntur harum cumque obcaecati accusamus magnam excepturi ducimus. Consequatur deleniti tempora quibusdam facilis. 
+            Laboriosam iusto eaque quae numquam nesciunt optio perspiciatis natus ad dolorum eum fugiat deserunt vero corporis quas, qui earum blanditiis odit tempore illum voluptates harum praesentium dolorem nulla odio. Eum perferendis qui, consequuntur fugiat maiores adipisci cupiditate dignissimos doloribus ex ab fuga voluptas. Enim,
+             labore, dolorem necessitatibus vitae nihil, porro natus maxime at eius nostrum quidem 
+            cumque quo repellendus exercitationem commodi doloribus impedit. Itaque illum tempore nobis? Amet optio dolores sapiente dolor. Nemo tempore sunt accusantium, voluptates dignissimos, error mollitia, 
+            doloribus quia laborum laboriosam dolores animi quos sequi vitae. Nam, ut. Quidem labore ipsam necessitatibus illum reiciendis rem, rerum assumenda soluta quas cupiditate aperiam quam cumque laudantium sed architecto reprehenderit laborum iure!</p>
+      </div>
+      
+      <!-- blogs -->
+      <div class="blogs">
+        <div class="container">
+            <h1 class="text-center">Blogs</h1>
+            <div class="row mb-2 py-4">
+                {% for i in blog %}
+                <div class="col-md-6">
+                  <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                      <strong class="d-inline-block mb-2 text-success">{{ i.id }} this is id</strong>
+                      <h3 class="mb-0">{{ i.title }}</h3>
+                      <div class="mb-1 text-muted">{{ i.created_at }}</div>
+                      <p class="mb-auto">{{ i.short_desc }}</p>
+                      <a href="{% url 'content' i.id %}" class="stretched-link">Continue reading</a>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                      <img src="media/{{ i.thumbnail }}"alt=""style="width: 300px; " class="bd-placeholder-img" alt="">
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+        
+        </div>
+      </div>
+      
+      
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>
+{% endblock %}
